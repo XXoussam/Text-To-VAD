@@ -88,3 +88,134 @@ WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status
 Could not fetch URL https://download.pytorch.org/whl/cu124/torch/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='download.pytorch.org', port=443): Max retries exceeded with url: /whl/cu124/torch/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))) - skipping
 ERROR: Could not find a version that satisfies the requirement torch==2.6.0+cu124 (from versions: 2.2.0, 2.2.1, 2.2.2, 2.3.0, 2.3.1, 2.4.0, 2.4.1, 2.5.0, 2.5.1, 2.6.0, 2.7.0, 2.7.1, 2.8.0, 2.9.0, 2.9.1, 2.10.0, 2.11.0, 2.12.0, 2.12.1, 2.13.0, 2.14.0)
 ERROR: No matching distribution found for torch==2.6.0+cu124
+
+
+---------------------------
+THE SSL ERROR :
+
+(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD> python train.py
+transformers: 4.57.6
+GPU: NVIDIA RTX 2000 Ada Generation Laptop GPU
+(10061, 9)
+split
+train    8062
+test     1000
+dev       999
+Name: count, dtype: int64
+                  V            A             D
+count  10061.000000  10061.00000  10061.000000
+mean       2.976709      3.04180      3.062791
+std        0.348727      0.25955      0.209666
+min        1.200000      1.80000      1.780000
+25%        2.800000      2.89000      3.000000
+50%        3.000000      3.00000      3.090000
+75%        3.120000      3.20000      3.200000
+max        4.600000      4.40000      4.200000
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /microsoft/deberta-v3-base/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: 3128ff0e-b07a-4fce-b8b4-f2f40c208fae)')' thrown while requesting HEAD https://huggingface.co/microsoft/deberta-v3-base/resolve/main/tokenizer_config.json
+Retrying in 1s [Retry 1/5].
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /microsoft/deberta-v3-base/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: c5dd125d-09d5-4742-9202-9827968169ba)')' thrown while requesting HEAD https://huggingface.co/microsoft/deberta-v3-base/resolve/main/tokenizer_config.json
+Retrying in 2s [Retry 2/5].
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /microsoft/deberta-v3-base/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: 98fd5792-492f-438d-8cd0-bec7ca83c305)')' thrown while requesting HEAD https://huggingface.co/microsoft/deberta-v3-base/resolve/main/tokenizer_config.json
+Retrying in 4s [Retry 3/5].
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /microsoft/deberta-v3-base/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: d7d8a9ec-4ad9-4597-b748-df1a9e5d981b)')' thrown while requesting HEAD https://huggingface.co/microsoft/deberta-v3-base/resolve/main/tokenizer_config.json
+Retrying in 8s [Retry 4/5].
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /microsoft/deberta-v3-base/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: ec3ac7a9-4a34-407c-b150-562c8052985a)')' thrown while requesting HEAD https://huggingface.co/microsoft/deberta-v3-base/resolve/main/tokenizer_config.json
+Retrying in 8s [Retry 5/5].
+'(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /microsoft/deberta-v3-base/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: d3824de3-7836-416d-9d91-e2ab0a5bd08a)')' thrown while requesting HEAD https://huggingface.co/microsoft/deberta-v3-base/resolve/main/tokenizer_config.json
+C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\transformers\convert_slow_tokenizer.py:566: UserWarning: The sentencepiece tokenizer that you are converting to a fast tokenizer uses the byte fallback option which is not implemented in the fast tokenizers. In practice this means that the fast version of the tokenizer can produce unknown tokens whereas the sentencepiece version would have converted these unknown tokens into a sequence of byte tokens matching the original piece of text.
+  warnings.warn(
+Traceback (most recent call last):
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connectionpool.py", line 470, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1125, in _validate_conn
+    conn.connect()
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connection.py", line 878, in connect
+    wrapped_socket, is_verified = _ssl_wrap_socket_and_match_hostname(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connection.py", line 1080, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 437, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 481, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\ssl.py", line 1046, in _create
+    self.do_handshake()
+  File "C:\Program Files\Python312\Lib\ssl.py", line 1321, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connectionpool.py", line 494, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\urllib3\util\retry.py", line 555, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /api/models/microsoft/deberta-v3-base (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\train.py", line 136, in <module>
+    main()
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\train.py", line 71, in main
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\transformers\models\auto\tokenization_auto.py", line 1175, in from_pretrained
+    return tokenizer_class_fast.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\transformers\tokenization_utils_base.py", line 2113, in from_pretrained
+    return cls._from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\transformers\tokenization_utils_base.py", line 2395, in _from_pretrained
+    tokenizer = cls._patch_mistral_regex(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\transformers\tokenization_utils_base.py", line 2442, in _patch_mistral_regex
+    _is_local or (not _is_local and is_base_mistral(pretrained_model_name_or_path))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\transformers\tokenization_utils_base.py", line 2432, in is_base_mistral
+    model = model_info(model_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\huggingface_hub\hf_api.py", line 2660, in model_info
+    r = get_session().get(path, headers=headers, timeout=timeout, params=params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\requests\sessions.py", line 671, in get
+    return self.request("GET", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\huggingface_hub\utils\_http.py", line 96, in send
+    return super().send(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\requests\adapters.py", line 727, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /api/models/microsoft/deberta-v3-base (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))"), '(Request ID: 715b06b6-a531-4cd1-a3c2-0b351e3d43f1)')
+(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD>
