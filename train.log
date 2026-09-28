@@ -1,0 +1,69 @@
+(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD> python -c "import torch; print(torch.__version__)"
+2.6.0+cu124
+(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD> python train.py
+transformers: 5.17.0
+GPU: NVIDIA RTX 2000 Ada Generation Laptop GPU
+(10061, 9)
+split
+train    8062
+test     1000
+dev       999
+Name: count, dtype: int64
+                  V            A             D
+count  10061.000000  10061.00000  10061.000000
+mean       2.976709      3.04180      3.062791
+std        0.348727      0.25955      0.209666
+min        1.200000      1.80000      1.780000
+25%        2.800000      2.89000      3.000000
+50%        3.000000      3.00000      3.090000
+75%        3.120000      3.20000      3.200000
+max        4.600000      4.40000      4.200000
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Map: 100%|█████████████████████████████| 8062/8062 [00:00<00:00, 62713.13 examples/s]
+Map: 100%|███████████████████████████████| 999/999 [00:00<00:00, 64191.65 examples/s]
+Map: 100%|█████████████████████████████| 1000/1000 [00:00<00:00, 68920.65 examples/s]
+DatasetDict({
+    train: Dataset({
+        features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+        num_rows: 8062
+    })
+    validation: Dataset({
+        features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+        num_rows: 999
+    })
+    test: Dataset({
+        features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+        num_rows: 1000
+    })
+})
+Loading weights: 100%|██████████████████████████| 198/198 [00:00<00:00, 33005.02it/s]
+[transformers] DebertaV2ForSequenceClassification LOAD REPORT from: microsoft/deberta-v3-base
+Key                                     | Status     |
+----------------------------------------+------------+-
+mask_predictions.dense.bias             | UNEXPECTED |
+lm_predictions.lm_head.LayerNorm.bias   | UNEXPECTED |
+lm_predictions.lm_head.dense.bias       | UNEXPECTED |
+mask_predictions.dense.weight           | UNEXPECTED |
+lm_predictions.lm_head.bias             | UNEXPECTED |
+mask_predictions.classifier.weight      | UNEXPECTED |
+mask_predictions.LayerNorm.bias         | UNEXPECTED |
+lm_predictions.lm_head.dense.weight     | UNEXPECTED |
+mask_predictions.classifier.bias        | UNEXPECTED |
+lm_predictions.lm_head.LayerNorm.weight | UNEXPECTED |
+mask_predictions.LayerNorm.weight       | UNEXPECTED |
+pooler.dense.bias                       | MISSING    |
+classifier.bias                         | MISSING    |
+pooler.dense.weight                     | MISSING    |
+classifier.weight                       | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Traceback (most recent call last):
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\train.py", line 129, in <module>
+    main()
+  File "C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\train.py", line 78, in main
+    training_args = TrainingArguments(
+                    ^^^^^^^^^^^^^^^^^^
+TypeError: TrainingArguments.__init__() got an unexpected keyword argument 'warmup_ratio'
+(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD>
