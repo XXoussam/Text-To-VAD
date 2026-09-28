@@ -26,8 +26,14 @@ predict.py          score sentences from the CLI / a file
 ```bash
 python -m venv .venv
 .venv\Scripts\activate          # Windows  (Linux/macOS: source .venv/bin/activate)
-pip install -r requirements.txt   # includes the CUDA 12.4 torch build
+python -m pip install -U pip    # recent pip trusts the Windows certificate store (needed behind corporate proxies)
+pip install "torch==2.6.0+cu124" --index-url https://download.pytorch.org/whl/cu124   # GPU build, install first
+pip install -r requirements.txt
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"   # expect: 2.6.0+cu124 True
 ```
+
+If pip fails with `CERTIFICATE_VERIFY_FAILED` for `download.pytorch.org`, your network intercepts HTTPS.
+Upgrading pip (above) usually fixes it; otherwise add `--trusted-host download.pytorch.org` to the torch install.
 
 ## Usage
 

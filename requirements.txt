@@ -1,7 +1,7 @@
-# PyTorch CUDA 12.4 build (PyPI only ships CPU-only torch on Windows).
-# The +cu124 pin can only be satisfied from the PyTorch index below.
---extra-index-url https://download.pytorch.org/whl/cu124
-torch==2.6.0+cu124
+# PyTorch: install the CUDA build FIRST (PyPI only ships CPU-only torch on Windows):
+#   pip install "torch==2.6.0+cu124" --index-url https://download.pytorch.org/whl/cu124
+# Once installed, this line keeps it as-is instead of pulling a CPU build.
+torch>=2.1
 
 # 4.41+ for `eval_strategy`; <5 because transformers 5 removed `warmup_ratio`
 transformers>=4.41,<5
