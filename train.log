@@ -73,3 +73,18 @@ TypeError: TrainingArguments.__init__() got an unexpected keyword argument 'warm
 --------------
 notes : check error and the version of the transformers library. The error indicates that the 'warmup_ratio' argument is not recognized in the TrainingArguments class. This could be due to using an older version of the transformers library that does not support this argument.
 make sure to fix requirent file to use the correct version of the transformers library that supports the 'warmup_ratio' argument in the TrainingArguments class. 
+
+
+------------------------------
+i think i should cleanup the env first : 
+
+(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD> pip install -r requirements.txt
+Looking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cu124
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))': /whl/cu124/torch/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))': /whl/cu124/torch/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))': /whl/cu124/torch/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))': /whl/cu124/torch/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))': /whl/cu124/torch/
+Could not fetch URL https://download.pytorch.org/whl/cu124/torch/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='download.pytorch.org', port=443): Max retries exceeded with url: /whl/cu124/torch/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))) - skipping
+ERROR: Could not find a version that satisfies the requirement torch==2.6.0+cu124 (from versions: 2.2.0, 2.2.1, 2.2.2, 2.3.0, 2.3.1, 2.4.0, 2.4.1, 2.5.0, 2.5.1, 2.6.0, 2.7.0, 2.7.1, 2.8.0, 2.9.0, 2.9.1, 2.10.0, 2.11.0, 2.12.0, 2.12.1, 2.13.0, 2.14.0)
+ERROR: No matching distribution found for torch==2.6.0+cu124
