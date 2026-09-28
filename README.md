@@ -26,8 +26,7 @@ predict.py          score sentences from the CLI / a file
 ```bash
 python -m venv .venv
 .venv\Scripts\activate          # Windows  (Linux/macOS: source .venv/bin/activate)
-pip install torch --index-url https://download.pytorch.org/whl/cu121   # GPU build
-pip install -r requirements.txt
+pip install -r requirements.txt   # includes the CUDA 12.4 torch build
 ```
 
 ## Usage

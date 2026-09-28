@@ -1,9 +1,10 @@
-# PyTorch: for GPU training on Windows/Linux, install the CUDA build first, e.g.
-#   pip install torch --index-url https://download.pytorch.org/whl/cu121
-# (a plain `pip install torch` on Windows gives the CPU-only build)
-torch>=2.1
+# PyTorch CUDA 12.4 build (PyPI only ships CPU-only torch on Windows).
+# The +cu124 pin can only be satisfied from the PyTorch index below.
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0+cu124
 
-transformers>=4.41      # uses `eval_strategy` (was `evaluation_strategy` before 4.41)
+# 4.41+ for `eval_strategy`; <5 because transformers 5 removed `warmup_ratio`
+transformers>=4.41,<5
 datasets>=2.18
 accelerate>=0.26        # required by Trainer
 
