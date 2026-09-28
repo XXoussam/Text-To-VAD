@@ -1,8 +1,6 @@
-(.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD> python -c "import torch; print(torch.__version__)"
-2.6.0+cu124
 (.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD> python train.py
 transformers: 5.17.0
-GPU: NVIDIA RTX 2000 Ada Generation Laptop GPU
+GPU: None (training on CPU will be slow)
 (10061, 9)
 split
 train    8062
@@ -18,10 +16,9 @@ min        1.200000      1.80000      1.780000
 50%        3.000000      3.00000      3.090000
 75%        3.120000      3.20000      3.200000
 max        4.600000      4.40000      4.200000
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Map: 100%|█████████████████████████████| 8062/8062 [00:00<00:00, 62713.13 examples/s]
-Map: 100%|███████████████████████████████| 999/999 [00:00<00:00, 64191.65 examples/s]
-Map: 100%|█████████████████████████████| 1000/1000 [00:00<00:00, 68920.65 examples/s]
+Map: 100%|███████████████████████████| 8062/8062 [00:00<00:00, 76359.09 examples/s]
+Map: 100%|█████████████████████████████| 999/999 [00:00<00:00, 55277.03 examples/s]
+Map: 100%|███████████████████████████| 1000/1000 [00:00<00:00, 82798.11 examples/s]
 DatasetDict({
     train: Dataset({
         features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
@@ -36,23 +33,25 @@ DatasetDict({
         num_rows: 1000
     })
 })
-Loading weights: 100%|██████████████████████████| 198/198 [00:00<00:00, 33005.02it/s]
+C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD\.venv\Lib\site-packages\torch\jit\_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights: 100%|███████████████████████████████████| 198/198 [00:00<?, ?it/s]
 [transformers] DebertaV2ForSequenceClassification LOAD REPORT from: microsoft/deberta-v3-base
 Key                                     | Status     |
 ----------------------------------------+------------+-
-mask_predictions.dense.bias             | UNEXPECTED |
+lm_predictions.lm_head.dense.weight     | UNEXPECTED |
+lm_predictions.lm_head.LayerNorm.weight | UNEXPECTED |
 lm_predictions.lm_head.LayerNorm.bias   | UNEXPECTED |
+mask_predictions.classifier.bias        | UNEXPECTED |
+mask_predictions.dense.bias             | UNEXPECTED |
 lm_predictions.lm_head.dense.bias       | UNEXPECTED |
-mask_predictions.dense.weight           | UNEXPECTED |
 lm_predictions.lm_head.bias             | UNEXPECTED |
+mask_predictions.dense.weight           | UNEXPECTED |
+mask_predictions.LayerNorm.weight       | UNEXPECTED |
 mask_predictions.classifier.weight      | UNEXPECTED |
 mask_predictions.LayerNorm.bias         | UNEXPECTED |
-lm_predictions.lm_head.dense.weight     | UNEXPECTED |
-mask_predictions.classifier.bias        | UNEXPECTED |
-lm_predictions.lm_head.LayerNorm.weight | UNEXPECTED |
-mask_predictions.LayerNorm.weight       | UNEXPECTED |
-pooler.dense.bias                       | MISSING    |
 classifier.bias                         | MISSING    |
+pooler.dense.bias                       | MISSING    |
 pooler.dense.weight                     | MISSING    |
 classifier.weight                       | MISSING    |
 
@@ -67,3 +66,10 @@ Traceback (most recent call last):
                     ^^^^^^^^^^^^^^^^^^
 TypeError: TrainingArguments.__init__() got an unexpected keyword argument 'warmup_ratio'
 (.venv) PS C:\Users\osaoudi\Desktop\EASPORTS\VoiceComAnalysis\Text-To-VAD>
+
+
+
+
+--------------
+notes : check error and the version of the transformers library. The error indicates that the 'warmup_ratio' argument is not recognized in the TrainingArguments class. This could be due to using an older version of the transformers library that does not support this argument.
+make sure to fix requirent file to use the correct version of the transformers library that supports the 'warmup_ratio' argument in the TrainingArguments class. 
