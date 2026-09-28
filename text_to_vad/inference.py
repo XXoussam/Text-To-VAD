@@ -10,12 +10,21 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from .config import LABEL_COLS, MAX_LENGTH, OUTPUT_DIR, from_unit
 
 
+def _no_mistral_regex_patch() -> dict:
+    """transformers 4.57.3–4.x flags *any* locally saved tokenizer as a broken Mistral one
+    and warns to pass `fix_mistral_regex=True`, which would swap DeBERTa's pre-tokenizer
+    for Mistral's. Passing False explicitly silences that false positive and keeps ours."""
+    from transformers import PreTrainedTokenizerBase
+
+    return {"fix_mistral_regex": False} if hasattr(PreTrainedTokenizerBase, "_patch_mistral_regex") else {}
+
+
 class VADPredictor:
     def __init__(self, model_dir: str = OUTPUT_DIR, device: Optional[str] = None,
                  max_length: int = MAX_LENGTH):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.max_length = max_length
-        self.tokenizer = AutoTokenizer.from_pretrained(model_dir)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_dir, **_no_mistral_regex_patch())
         self.model = AutoModelForSequenceClassification.from_pretrained(model_dir)
         self.model.to(self.device).eval()
 
