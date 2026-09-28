@@ -11,6 +11,8 @@ import dataclasses
 import json
 import os
 
+import text_to_vad  # noqa: F401  -- first: switches HTTPS to the OS certificate store
+
 import pandas as pd
 import torch
 import transformers

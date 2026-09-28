@@ -13,6 +13,9 @@ sentencepiece>=0.1.99
 protobuf>=3.20
 tiktoken                # needed by some newer transformers tokenizer conversions
 
+# Use the Windows/macOS certificate store for HTTPS (corporate proxies)
+truststore>=0.9
+
 numpy
 pandas>=1.5
 scipy>=1.9

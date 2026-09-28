@@ -34,6 +34,7 @@ python -c "import torch; print(torch.__version__, torch.cuda.is_available())"   
 
 If pip fails with `CERTIFICATE_VERIFY_FAILED` for `download.pytorch.org`, your network intercepts HTTPS.
 Upgrading pip (above) usually fixes it; otherwise add `--trusted-host download.pytorch.org` to the torch install.
+The scripts themselves use `truststore` (in requirements) so Hugging Face downloads trust the same OS certificates.
 
 ## Usage
 
