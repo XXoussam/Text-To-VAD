@@ -4,3 +4,4 @@ __pycache__/
 venv/
 .ipynb_checkpoints/
 deberta_vad/
+deberta_vad_*/

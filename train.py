@@ -25,6 +25,10 @@ from transformers import (
     TrainingArguments,
     set_seed,
 )
+import matplotlib
+matplotlib.use("Agg")  # headless-safe
+import matplotlib.pyplot as plt
+import numpy as np
 
 from text_to_vad.config import EMOBANK_URL, LABEL_COLS, MAX_LENGTH, MODEL_NAME, OUTPUT_DIR, SEED, from_unit
 from text_to_vad.data import build_datasets, load_emobank, tokenize_datasets
@@ -55,6 +59,65 @@ def warmup_kwargs(ratio: float) -> dict:
     return {"warmup_ratio": ratio} if "warmup_ratio" in fields else {"warmup_steps": ratio}
 
 
+
+def plot_training_curves(log_history: list[dict], path: str) -> None:
+    """Loss, learning rate, and every eval metric, from Trainer's log_history."""
+    train = [h for h in log_history if "loss" in h and "eval_loss" not in h]
+    evals = [h for h in log_history if "eval_loss" in h]
+
+    # Any numeric eval metric except loss/runtime/throughput bookkeeping
+    skip = {"eval_loss", "eval_runtime", "eval_samples_per_second", "eval_steps_per_second", "epoch"}
+    metric_keys = sorted(
+        k for k in (evals[0] if evals else {}) if k.startswith("eval_") and k not in skip
+    )
+
+    fig, axes = plt.subplots(1, 3, figsize=(17, 4.5))
+
+    # Loss
+    ax = axes[0]
+    if train:
+        ax.plot([h["epoch"] for h in train], [h["loss"] for h in train], alpha=0.7, label="train (per log step)")
+    if evals:
+        ax.plot([h["epoch"] for h in evals], [h["eval_loss"] for h in evals], "o-", label="validation")
+    ax.set(title="Loss (MSE)", xlabel="epoch", ylabel="loss")
+    ax.legend()
+    ax.grid(alpha=0.3)
+
+    # Learning rate schedule
+    ax = axes[1]
+    lr = [h for h in train if "learning_rate" in h]
+    if lr:
+        ax.plot([h["epoch"] for h in lr], [h["learning_rate"] for h in lr])
+    ax.set(title="Learning rate", xlabel="epoch", ylabel="lr")
+    ax.grid(alpha=0.3)
+
+    # Validation metrics per epoch
+    ax = axes[2]
+    for k in metric_keys:
+        ax.plot([h["epoch"] for h in evals], [h[k] for h in evals], "o-", label=k.removeprefix("eval_"))
+    ax.set(title="Validation metrics", xlabel="epoch")
+    if metric_keys:
+        ax.legend(fontsize=8)
+    ax.grid(alpha=0.3)
+
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
+
+
+def plot_residuals(preds: np.ndarray, labels: np.ndarray, names: list[str], path: str) -> None:
+    """Histogram of (pred - true) per dimension, with mean/std annotated."""
+    fig, axes = plt.subplots(1, len(names), figsize=(5 * len(names), 4), sharey=True)
+    for i, (ax, name) in enumerate(zip(np.atleast_1d(axes), names)):
+        res = preds[:, i] - labels[:, i]
+        ax.hist(res, bins=40, alpha=0.8)
+        ax.axvline(0, color="k", lw=1)
+        ax.set(title=f"{name} residuals\nmean={res.mean():+.3f}  std={res.std():.3f}", xlabel="pred − true")
+        ax.grid(alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
+
 def main():
     args = parse_args()
     set_seed(args.seed)
@@ -81,6 +144,9 @@ def main():
         num_labels=len(LABEL_COLS),
         problem_type="regression",
     )
+    # transformers 5 keeps the checkpoint dtype (fp16 for deberta-v3-base);
+    # mixed-precision training needs fp32 master weights.
+    model = model.float()
     model.config.id2label = {i: n for i, n in enumerate(LABEL_COLS)}
     model.config.label2id = {n: i for i, n in enumerate(LABEL_COLS)}
 
@@ -117,6 +183,10 @@ def main():
 
     trainer.train()
 
+    curves_path = os.path.join(args.output_dir, "training_curves.png")
+    plot_training_curves(trainer.state.log_history, curves_path)
+    print(f"Saved training curves to {curves_path}")
+
     # Held-out test set
     pred_out = trainer.predict(tokenized_ds["test"], metric_key_prefix="test")
     test_metrics = pred_out.metrics
@@ -125,8 +195,13 @@ def main():
         json.dump(test_metrics, f, indent=2)
 
     plot_path = os.path.join(args.output_dir, "test_scatter.png")
-    plot_predictions(from_unit(pred_out.predictions), from_unit(pred_out.label_ids), plot_path)
-    print(f"Saved plot to {plot_path}")
+    test_preds = from_unit(pred_out.predictions)
+    test_labels = from_unit(pred_out.label_ids)
+    plot_predictions(test_preds, test_labels, plot_path)
+
+    resid_path = os.path.join(args.output_dir, "test_residuals.png")
+    plot_residuals(test_preds, test_labels, LABEL_COLS, resid_path)
+    print(f"Saved residual plot to {resid_path}")
 
     # Save best model + tokenizer
     trainer.save_model(args.output_dir)
